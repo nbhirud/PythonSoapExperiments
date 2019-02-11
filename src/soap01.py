@@ -1,14 +1,10 @@
-# from zeep import Client
-#
-# client = Client('http://www.webservicex.net/ConvertSpeed.asmx?WSDL')
-# result = client.service.ConvertSpeed(
-#     100, 'kilometersPerhour', 'milesPerhour')
-#
-# assert result == 62.137
-
-
 import zeep
+# import datetime
 
-wsdl = 'http://www.soapclient.com/xml/soapresponder.wsdl'
+wsdl = 'http://currencyconverter.kowabunga.net/converter.asmx?WSDL'
 client = zeep.Client(wsdl=wsdl)
-print(client.service.Method1('Zeep', 'is cool'))
+curr1 = 'USD'
+curr2 = 'INR'
+lastUpdateDate = client.service.GetLastUpdateDate()
+# print lastUpdateDate
+print 'Conversation rate from %s to %s is: %s as of %s' %(curr1, curr2, client.service.GetConversionRate(curr1, curr2, lastUpdateDate), lastUpdateDate)
